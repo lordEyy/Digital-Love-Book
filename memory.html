@@ -1,0 +1,303 @@
+<!-- memory.html (Responsive Memory Lane Timeline) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Lane 💫</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      background: #ffeef5;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #d63384;
+      padding: 20px 0;
+      min-height: 100vh;
+    }
+    
+    .timeline {
+      width: 90%;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff0f6;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(255, 153, 204, 0.3);
+    }
+    
+    .memory {
+      margin: 30px 0;
+      padding: 15px;
+      background: #ffd6ec;
+      border-left: 5px solid #ff99cc;
+      border-radius: 10px;
+      animation: fadeInUp 1s ease-in-out;
+      word-wrap: break-word;
+    }
+    
+    .memory h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.1em, 4vw, 1.3em);
+      line-height: 1.3;
+    }
+    
+    .memory p {
+      font-size: clamp(0.9em, 3vw, 1em);
+      line-height: 1.5;
+      margin: 10px 0;
+    }
+    
+    .memory img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-top: 10px;
+      display: block;
+    }
+    
+    #typewriter {
+      min-height: 1.5em;
+      font-weight: bold;
+      color: #ff1493;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .next-button {
+      display: block;
+      width: max-content;
+      margin: 40px auto;
+      padding: 12px 24px;
+      background-color: #ff99cc;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: clamp(0.9em, 3vw, 1em);
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      min-height: 44px;
+      transition: transform 0.2s ease;
+      white-space: nowrap;
+    }
+    
+    .next-button:hover {
+      transform: scale(1.05);
+    }
+    
+    .next-button:active {
+      transform: scale(0.98);
+    }
+    
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px 0;
+      }
+      
+      .timeline {
+        width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+        border-radius: 15px;
+      }
+      
+      .memory {
+        margin: 20px 0;
+        padding: 12px;
+        border-radius: 8px;
+      }
+      
+      .memory img {
+        max-height: 180px;
+      }
+      
+      .next-button {
+        margin: 30px auto;
+        padding: 14px 20px;
+        font-size: 1em;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .timeline {
+        width: 98%;
+        padding: 12px;
+        margin: 15px auto;
+      }
+      
+      .memory {
+        margin: 15px 0;
+        padding: 10px;
+        border-left-width: 3px;
+      }
+      
+      .memory img {
+        max-height: 150px;
+        border-radius: 8px;
+      }
+      
+      .next-button {
+        margin: 25px auto;
+        padding: 16px 20px;
+        width: 90%;
+        max-width: 280px;
+        white-space: normal;
+        line-height: 1.2;
+      }
+    }
+    
+    /* Landscape orientation on mobile */
+    @media (max-height: 500px) and (orientation: landscape) {
+      body {
+        padding: 5px 0;
+      }
+      
+      .timeline {
+        margin: 10px auto;
+        padding: 10px;
+      }
+      
+      .memory {
+        margin: 15px 0;
+        padding: 8px;
+      }
+      
+      .memory img {
+        max-height: 120px;
+      }
+      
+      .next-button {
+        margin: 20px auto;
+        padding: 8px 16px;
+      }
+    }
+    
+    /* High DPI displays */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .memory img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+      }
+    }
+    
+    /* Reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+      .memory {
+        animation: none;
+      }
+      
+      .next-button {
+        animation: none;
+      }
+      
+      #typewriter {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="timeline">
+    <div class="memory">
+      <h2>🎧📓 The Day We Met</h2>
+      <p>haha mujhe haasi aaraha iss page ko likhne mai, anywas focus 
+        kaha mile the bookfair mai hmmn, thanks to camus baas. 💫</p>
+      <img src="img/dayimg.png" alt="The Day We Met" loading="lazy">
+    </div>
+    
+    <div class="memory">
+      <h2>⌨️ Our First Text</h2>
+      <p>"Hi tha ki hello tha lol" turned into <s>I can't stop smiling because of you</s> naaa "kya khaye khane mai aaj?."</p>
+      <img src="img/textim.jpg" alt="Our First Text" loading="lazy">
+    </div>
+    
+    <div class="memory">
+      <h2>📸 Cute Moments</h2>
+      <p>hmmn ABHI TOH BANA NE HAI BOHOTTT. PHIR BHI HAI KUCH YOU KNOW WASSE :p</p>
+      <img src="img/cdayimg1.jpg" alt="Cute Moments" loading="lazy">
+    </div>
+    
+    <div class="memory">
+      <h2>🦢 Surprises & Dates</h2>
+      <p>Hatao isko lol, kuch acha diye nhi hai. oh dates haha ye image dena hi tha i love their chemistry.</p>
+      <img src="img/kaguya.jpg" alt="Surprises & Dates" loading="lazy">
+    </div>
+    
+    <div class="memory">
+      <h2>💬 Things I Love About You</h2>
+      <p id="typewriter"></p>
+    </div>
+    
+    <button class="next-button" onclick="location.href='letter.html'">No turning back after this... 😳</button>
+  </div>
+  
+  <script src="js/typewriter.js"></script>
+  <script>
+    // Simple typewriter effect for last memory block
+    const words = [
+      "tumhari aawaz", "tum", "aur kya de", "tumhari baate", "hmm...", "haha"
+    ];
+    let i = 0, j = 0, current = '', isDeleting = false;
+    const typeTarget = document.getElementById('typewriter');
+
+    function type() {
+      if (i < words.length) {
+        if (!isDeleting && j <= words[i].length) {
+          current = words[i].substring(0, j++);
+        } else if (isDeleting && j >= 0) {
+          current = words[i].substring(0, j--);
+        }
+
+        typeTarget.innerHTML = current;
+
+        if (!isDeleting && j === words[i].length) {
+          isDeleting = true;
+          setTimeout(type, 300);
+        } else if (isDeleting && j === 0) {
+          isDeleting = false;
+          i = (i + 1) % words.length;
+          setTimeout(type, 500);
+        } else {
+          setTimeout(type, isDeleting ? 130 : 150);
+        }
+      }
+    }
+    
+    // Start typewriter effect when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(type, 1000); // Small delay to let animations settle
+    });
+
+    // Handle orientation changes
+    window.addEventListener('orientationchange', function() {
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
+    });
+  </script>
+</body>
+</html>

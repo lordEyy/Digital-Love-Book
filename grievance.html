@@ -1,0 +1,301 @@
+<!-- grievance.html (Page 5: Cute Grievance Page) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Tiny Complaints 😤💗</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      background: #fff0f5;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: clamp(20px, 6vw, 40px) clamp(15px, 4vw, 20px);
+      text-align: center;
+      color: #d63384;
+    }
+    
+    h1 {
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      margin-bottom: clamp(10px, 3vw, 15px);
+      line-height: 1.2;
+      padding: 0 10px;
+    }
+    
+    p {
+      font-size: clamp(0.9rem, 4vw, 1.1rem);
+      margin-bottom: clamp(15px, 4vw, 25px);
+      line-height: 1.4;
+      padding: 0 15px;
+      max-width: 600px;
+    }
+    
+    textarea {
+      width: 100%;
+      max-width: 500px;
+      height: clamp(120px, 25vh, 180px);
+      border-radius: 15px;
+      border: 2px dashed #ff99cc;
+      padding: clamp(12px, 3vw, 18px);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-size: clamp(0.85rem, 3.5vw, 1rem);
+      resize: none;
+      background: #ffe6f0;
+      color: #c2185b;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    
+    textarea:focus {
+      border-color: #ff69b4;
+      border-style: solid;
+    }
+    
+    textarea::placeholder {
+      color: #ff99cc;
+      opacity: 0.8;
+    }
+    
+    .hint {
+      font-size: clamp(0.75rem, 3vw, 0.9rem);
+      margin-top: clamp(8px, 2vw, 12px);
+      color: #999;
+      line-height: 1.3;
+      padding: 0 10px;
+    }
+    
+    .next-button {
+      margin-top: clamp(25px, 6vw, 40px);
+      padding: clamp(12px, 3vw, 15px) clamp(18px, 4vw, 25px);
+      background-color: #ff99cc;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      min-height: 44px;
+      transition: transform 0.2s ease;
+      max-width: 90%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .next-button:hover {
+      transform: scale(1.05);
+    }
+    
+    .next-button:active {
+      transform: scale(0.98);
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    /* Mobile specific optimizations */
+    @media (max-width: 768px) {
+      body {
+        padding: 25px 15px;
+        justify-content: flex-start;
+        padding-top: clamp(30px, 8vh, 50px);
+      }
+      
+      h1 {
+        margin-bottom: 12px;
+      }
+      
+      p {
+        margin-bottom: 20px;
+        padding: 0 10px;
+      }
+      
+      textarea {
+        height: 140px;
+        padding: 15px;
+        font-size: 0.95rem;
+      }
+      
+      .hint {
+        margin-top: 10px;
+        padding: 0 5px;
+      }
+      
+      .next-button {
+        margin-top: 30px;
+        padding: 16px 20px;
+        white-space: normal;
+        line-height: 1.2;
+        text-align: center;
+        max-width: 85%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding: 20px 12px;
+        padding-top: clamp(25px, 6vh, 40px);
+      }
+      
+      h1 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+      }
+      
+      p {
+        font-size: 0.9rem;
+        margin-bottom: 18px;
+        padding: 0 8px;
+      }
+      
+      textarea {
+        height: 130px;
+        padding: 12px;
+        font-size: 0.9rem;
+        border-radius: 12px;
+      }
+      
+      .hint {
+        font-size: 0.8rem;
+        margin-top: 8px;
+      }
+      
+      .next-button {
+        margin-top: 25px;
+        padding: 18px 16px;
+        font-size: 0.95rem;
+        width: 90%;
+        max-width: 300px;
+        border-radius: 25px;
+      }
+    }
+    
+    /* Landscape orientation on mobile */
+    @media (max-height: 500px) and (orientation: landscape) {
+      body {
+        padding: 15px 10px;
+        padding-top: 20px;
+        justify-content: flex-start;
+      }
+      
+      h1 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+      }
+      
+      p {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+      }
+      
+      textarea {
+        height: 100px;
+        padding: 10px;
+        font-size: 0.85rem;
+      }
+      
+      .hint {
+        font-size: 0.75rem;
+        margin-top: 6px;
+      }
+      
+      .next-button {
+        margin-top: 20px;
+        padding: 12px 18px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* Very small screens */
+    @media (max-width: 320px) {
+      body {
+        padding: 15px 8px;
+      }
+      
+      h1 {
+        font-size: 1.1rem;
+        padding: 0 5px;
+      }
+      
+      p {
+        font-size: 0.85rem;
+        padding: 0 5px;
+      }
+      
+      textarea {
+        height: 120px;
+        padding: 10px;
+        font-size: 0.85rem;
+      }
+      
+      .next-button {
+        font-size: 0.85rem;
+        padding: 16px 12px;
+        width: 95%;
+      }
+    }
+    
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      body {
+        background: #ffffff;
+        color: #000000;
+      }
+      
+      textarea {
+        background: #ffffff;
+        color: #000000;
+        border-color: #000000;
+      }
+      
+      .next-button {
+        background-color: #000000;
+        color: #ffffff;
+        border: 2px solid #ff69b4;
+      }
+    }
+    
+    /* Reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+      .next-button {
+        animation: none;
+      }
+      
+      textarea {
+        transition: none;
+      }
+    }
+    
+    /* Focus styles for accessibility */
+    .next-button:focus {
+      outline: 2px solid #ff69b4;
+      outline-offset: 2px;
+    }
+    
+    /* Touch improvements */
+    @media (hover: none) {
+      .next-button:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Tiny Complaint Box 🐣🚨</h1>
+  <p>Got a little, silly complaint? I promise I'll accept it with love 🛠️ (maine ye line nhi likha hai so idk ahaha)</p>
+  <textarea placeholder="Write your cute complaint here..."></textarea>
+  <div class="hint">(Take a screenshot and send it to me!)📸 <s>backend kuch nhi hai XD</s></div>
+  <button class="next-button" onclick="location.href='ending.html'">This isn't goodbye... just brb 💫</button>
+</body>
+</html>

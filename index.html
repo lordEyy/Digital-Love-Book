@@ -1,0 +1,252 @@
+<!-- index.html (Responsive Landing Page with Pink Theme and Floating Effects) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome haha <3 </title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #ffd6ec, #ffe6f0), #fff0f5;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+    
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+    }
+    
+    h1 {
+      font-size: clamp(1.2em, 4vw, 2em);
+      color: #d63384;
+      margin-bottom: 30px;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+    
+    button {
+      padding: 12px 24px;
+      background-color: #ff99cc;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: clamp(0.9em, 3vw, 1.1em);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      animation: glow 2s infinite ease-in-out;
+      min-height: 44px; /* Touch-friendly minimum size */
+      width: auto;
+      max-width: 100%;
+      white-space: nowrap;
+    }
+    
+    button:hover {
+      transform: scale(1.05);
+    }
+    
+    button:active {
+      transform: scale(0.98);
+    }
+    
+    .floaty {
+      width: clamp(15px, 3vw, 20px);
+      height: clamp(15px, 3vw, 20px);
+      position: fixed;
+      background: #ffcce6;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: floaty 6s linear infinite;
+      pointer-events: none; /* Prevent interference with touch */
+    }
+    
+    .diagonal {
+      width: clamp(12px, 2.5vw, 15px);
+      height: clamp(12px, 2.5vw, 15px);
+      position: fixed;
+      background: #ff99cc;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: diagonal 7s linear infinite;
+      pointer-events: none;
+    }
+    
+    @keyframes floaty {
+      0% { transform: translateY(100vh); }
+      100% { transform: translateY(-100vh); }
+    }
+    
+    @keyframes diagonal {
+      0% { transform: translate(-50vw, 100vh); }
+      100% { transform: translate(100vw, -50vh); }
+    }
+    
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 10px #ff99cc; }
+      50% { box-shadow: 0 0 20px #ff66b2; }
+    }
+    
+    /* Mobile-specific optimizations */
+    @media (max-width: 768px) {
+      .centered {
+        padding: 15px;
+        width: 95%;
+      }
+      
+      h1 {
+        margin-bottom: 25px;
+      }
+      
+      button {
+        padding: 15px 30px;
+        font-size: 1em;
+        white-space: normal; /* Allow text wrapping on very small screens */
+        line-height: 1.2;
+      }
+      
+      /* Reduce animation intensity on mobile for better performance */
+      .floaty, .diagonal {
+        animation-duration: 8s;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .centered {
+        padding: 10px;
+        width: 98%;
+      }
+      
+      h1 {
+        margin-bottom: 20px;
+        line-height: 1.3;
+      }
+      
+      button {
+        padding: 16px 20px;
+        width: 90%;
+        max-width: 280px;
+      }
+    }
+    
+    /* Landscape orientation on mobile */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .centered {
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      
+      h1 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+      }
+      
+      button {
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body class="landing">
+  <div class="centered">
+    <h1>haha heyo, welcome to this site idk kuch OR our little corner of the internet! ahah copy kiye last line.</h1>
+    <button onclick="location.href='memory.html'">Come closer... it gets cuter 💕</button>
+  </div>
+  
+  <script>
+    // Audio autoplay handling
+    const audio = document.querySelector('audio');
+    
+    // Try to play audio immediately
+    function tryPlayAudio() {
+      if (audio) {
+        audio.play().catch(e => {
+          console.log('Autoplay blocked, will play on user interaction');
+          // If autoplay fails, play on first user interaction
+          document.addEventListener('click', () => {
+            audio.play();
+          }, { once: true });
+          
+          document.addEventListener('touchstart', () => {
+            audio.play();
+          }, { once: true });
+        });
+      }
+    }
+    
+    // Try to play when page loads
+    document.addEventListener('DOMContentLoaded', tryPlayAudio);
+    
+    // Also try when page becomes visible (if user switches tabs)
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && audio && audio.paused) {
+        audio.play().catch(e => console.log('Could not resume audio'));
+      }
+    });
+
+    // Reduce animation frequency on mobile devices
+    const isMobile = window.innerWidth <= 768;
+    const heartInterval = isMobile ? 500 : 300;
+    const floatyInterval = isMobile ? 600 : 400;
+    const diagonalInterval = isMobile ? 1000 : 800;
+
+    // Floating hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      heart.style.pointerEvents = 'none';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, heartInterval);
+
+    // Bubbles from bottom to top
+    function createFloaty() {
+      const floaty = document.createElement('div');
+      floaty.className = 'floaty';
+      floaty.style.left = Math.random() * 100 + 'vw';
+      floaty.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      document.body.appendChild(floaty);
+      setTimeout(() => floaty.remove(), 6000);
+    }
+    setInterval(createFloaty, floatyInterval);
+
+    // Diagonal cute bubbles
+    function createDiagonal() {
+      const d = document.createElement('div');
+      d.className = 'diagonal';
+      d.style.left = Math.random() * 100 + 'vw';
+      d.style.animationDuration = (Math.random() * 2 + 5) + 's';
+      document.body.appendChild(d);
+      setTimeout(() => d.remove(), 7000);
+    }
+    setInterval(createDiagonal, diagonalInterval);
+
+    // Handle orientation changes
+    window.addEventListener('orientationchange', function() {
+      setTimeout(() => {
+        // Recalculate any necessary dimensions after orientation change
+        window.scrollTo(0, 0);
+      }, 100);
+    });
+  </script>
+  
+  <audio autoplay loop preload="auto">
+    <source src="music/Sade_SO.mp3" type="audio/mpeg">
+  </audio>
+</body>
+</html>

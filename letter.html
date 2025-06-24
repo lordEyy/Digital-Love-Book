@@ -1,0 +1,348 @@
+<!-- letter.html (Responsive Love Letter) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Love Letter?? XD 💌</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top left, #ffe0f0, #ffd6ec);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+    
+    .envelope {
+      width: 300px;
+      height: 180px;
+      background: #ffb6c1;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+    
+    .envelope:active {
+      transform: scale(0.98);
+    }
+    
+    .flap {
+      width: 0;
+      height: 0;
+      border-left: 150px solid transparent;
+      border-right: 150px solid transparent;
+      border-bottom: 90px solid #ff69b4;
+      position: absolute;
+      top: -90px;
+      left: 0;
+      transition: transform 1s ease;
+      transform-origin: bottom;
+    }
+    
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+    }
+    
+    .letter-content {
+      display: none;
+      background: #fff0f8;
+      padding: clamp(15px, 4vw, 25px);
+      width: 95%;
+      max-width: 600px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(255, 182, 193, 0.5);
+      color: #c2185b;
+      font-size: clamp(14px, 3.5vw, 18px);
+      animation: fadeIn 1s ease forwards;
+      text-align: center;
+      line-height: 1.6;
+      margin: 0 auto;
+    }
+    
+    @keyframes fadeIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+    
+    .typewriter-text {
+      display: inline-block;
+      border-right: .1em solid #d63384;
+      white-space: normal;
+      overflow: visible;
+      word-wrap: break-word;
+      animation: blink-caret .75s step-end infinite;
+      min-height: 1.2em;
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #d63384 }
+    }
+    
+    .next-button {
+      margin-top: clamp(20px, 5vw, 30px);
+      padding: clamp(12px, 3vw, 15px) clamp(20px, 5vw, 25px);
+      background-color: #ff99cc;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: clamp(14px, 3.5vw, 16px);
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      display: none;
+      min-height: 44px;
+      transition: transform 0.2s ease;
+      white-space: nowrap;
+    }
+    
+    .next-button:hover {
+      transform: scale(1.05);
+    }
+    
+    .next-button:active {
+      transform: scale(0.98);
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    
+    /* Instruction text for mobile */
+    .tap-instruction {
+      position: absolute;
+      bottom: clamp(80px, 15vh, 120px);
+      left: 50%;
+      transform: translateX(-50%);
+      color: #d63384;
+      font-size: clamp(12px, 3vw, 14px);
+      animation: pulse 2s infinite;
+      pointer-events: none;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+    
+    /* Mobile specific optimizations */
+    @media (max-width: 768px) {
+      html, body {
+        padding: 15px;
+      }
+      
+      .envelope {
+        margin-bottom: 20px;
+      }
+      
+      .letter-content {
+        padding: 20px 15px;
+        border-radius: 12px;
+      }
+      
+      .typewriter-text {
+        text-align: left;
+        display: block;
+        white-space: normal;
+        word-wrap: break-word;
+      }
+      
+      .next-button {
+        margin-top: 25px;
+        padding: 16px 24px;
+        width: auto;
+        max-width: 90%;
+        white-space: normal;
+        line-height: 1.2;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      html, body {
+        padding: 10px;
+      }
+      
+      .letter-content {
+        width: 98%;
+        padding: 18px 12px;
+        border-radius: 10px;
+      }
+      
+      .next-button {
+        width: 85%;
+        max-width: 250px;
+        padding: 18px 20px;
+      }
+      
+      .tap-instruction {
+        bottom: 60px;
+        font-size: 12px;
+      }
+    }
+    
+    /* Landscape orientation on mobile */
+    @media (max-height: 500px) and (orientation: landscape) {
+      html, body {
+        padding: 10px;
+        align-items: flex-start;
+        justify-content: center;
+      }
+      
+      .envelope {
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+      
+      .letter-content {
+        margin-top: 10px;
+        padding: 15px 12px;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      
+      .next-button {
+        margin-top: 15px;
+        padding: 10px 20px;
+      }
+      
+      .tap-instruction {
+        bottom: 20px;
+        font-size: 11px;
+      }
+    }
+    
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      .letter-content {
+        background: #ffffff;
+        color: #000000;
+        border: 2px solid #ff69b4;
+      }
+      
+      .typewriter-text {
+        border-right-color: #000000;
+      }
+    }
+    
+    /* Reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+      .envelope {
+        transition: none;
+      }
+      
+      .flap {
+        transition: none;
+      }
+      
+      .letter-content {
+        animation: none;
+      }
+      
+      .next-button {
+        animation: none;
+      }
+      
+      .typewriter-text {
+        animation: none;
+        border-right: none;
+      }
+      
+      .tap-instruction {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="envelope" onclick="openEnvelope()">
+    <div class="flap"></div>
+  </div>
+  
+  <div class="tap-instruction" id="tapInstruction">
+    💌 Tap the envelope to open
+  </div>
+
+  <div class="letter-content" id="letterContent">
+    <p class="typewriter-text" id="typewriter">so umeed karte hai ke ab tak acha laga hoga dekh ke. 
+        sorry utna points likh nhi paye "what i love about you" mai, baki ahah jab bhi dekho ye toh hoping ke wo din theek jaye. aur ha time se sona hoga lol 💖</p>
+    <div>
+      <button class="next-button" id="nextBtn" onclick="location.href='song.html'">Boop me to continue 👉🎶</button>
+    </div>
+  </div>
+
+  <script>
+    function openEnvelope() {
+      const envelope = document.querySelector('.envelope');
+      const instruction = document.getElementById('tapInstruction');
+      
+      envelope.classList.add('open');
+      instruction.style.display = 'none';
+      
+      setTimeout(() => {
+        envelope.style.display = 'none';
+        const letter = document.getElementById('letterContent');
+        letter.style.display = 'block';
+
+        const text = document.getElementById('typewriter');
+        const fullText = text.textContent;
+        text.textContent = '';
+
+        let i = 0;
+        const typingSpeed = window.innerWidth <= 768 ? 40 : 50; // Faster on mobile
+        
+        const interval = setInterval(() => {
+          if (i < fullText.length) {
+            text.textContent += fullText.charAt(i);
+            i++;
+          } else {
+            clearInterval(interval);
+            // Remove the blinking cursor after typing is complete
+            setTimeout(() => {
+              text.style.borderRight = 'none';
+              document.getElementById('nextBtn').style.display = 'inline-block';
+            }, 500);
+          }
+        }, typingSpeed);
+      }, 1200);
+    }
+
+    // Handle orientation changes
+    window.addEventListener('orientationchange', function() {
+      setTimeout(() => {
+        // Scroll to top after orientation change
+        window.scrollTo(0, 0);
+      }, 100);
+    });
+
+    // Add touch feedback for mobile
+    const envelope = document.querySelector('.envelope');
+    envelope.addEventListener('touchstart', function() {
+      this.style.transform = 'scale(0.98)';
+    });
+    
+    envelope.addEventListener('touchend', function() {
+      this.style.transform = 'scale(1)';
+    });
+  </script>
+</body>
+</html>
