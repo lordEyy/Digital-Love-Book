@@ -1,12 +1,11 @@
+<!-- index.html (Responsive Landing Page with Pink Theme and Floating Effects) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome haha <3 </title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
   <style>
     * {
       box-sizing: border-box;
@@ -15,7 +14,6 @@
     body {
       margin: 0;
       background: linear-gradient(135deg, #ffd6ec, #ffe6f0), #fff0f5;
-      /* Updated font stack with web fonts and better fallbacks */
       font-family: 'Quicksand', 'Nunito', 'Trebuchet MS', 'Arial', sans-serif;
       overflow: hidden;
       min-height: 100vh;
@@ -38,7 +36,6 @@
       margin-bottom: 30px;
       line-height: 1.4;
       word-wrap: break-word;
-      font-weight: 600; /* Make it a bit bolder for better readability */
     }
     
     button {
@@ -55,8 +52,6 @@
       width: auto;
       max-width: 100%;
       white-space: nowrap;
-      font-family: inherit; /* Ensure button uses same font */
-      font-weight: 600;
     }
     
     button:hover {
@@ -102,11 +97,6 @@
     @keyframes glow {
       0%, 100% { box-shadow: 0 0 10px #ff99cc; }
       50% { box-shadow: 0 0 20px #ff66b2; }
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 1; }
     }
     
     /* Mobile-specific optimizations */
@@ -172,94 +162,36 @@
 <body class="landing">
   <div class="centered">
     <h1>haha heyo, welcome to this site idk kuch OR our little corner of the internet! ahah copy kiye last line.</h1>
-    <div id="music-prompt" style="display: none; color: #ff66b2; font-size: 0.9em; margin-bottom: 15px; animation: pulse 2s infinite;">
-      🎵 Tap anywhere to start the music! 🎵
-    </div>
     <button onclick="location.href='memory.html'">Come closer... it gets cuter 💕</button>
   </div>
   
   <script>
-    // Audio autoplay handling - iOS friendly
+    // Audio autoplay handling
     const audio = document.querySelector('audio');
-    let audioStarted = false;
     
-    // Function to start audio
-    function startAudio() {
-      if (audio && !audioStarted) {
-        audio.play().then(() => {
-          audioStarted = true;
-          console.log('Audio started successfully');
-        }).catch(e => {
-          console.log('Audio play failed:', e);
-        });
-      }
-    }
-    
-    // Try to play audio immediately (works on desktop)
+    // Try to play audio immediately
     function tryPlayAudio() {
       if (audio) {
         audio.play().catch(e => {
-          console.log('Autoplay blocked, waiting for user interaction');
+          console.log('Autoplay blocked, will play on user interaction');
+          // If autoplay fails, play on first user interaction
+          document.addEventListener('click', () => {
+            audio.play();
+          }, { once: true });
+          
+          document.addEventListener('touchstart', () => {
+            audio.play();
+          }, { once: true });
         });
       }
     }
     
-    // iOS requires user interaction - listen for ANY interaction
-    function setupUserInteractionListeners() {
-      const events = ['click', 'touchstart', 'touchend', 'mousedown', 'keydown'];
-      
-      function handleInteraction() {
-        startAudio();
-        hideMusicPrompt();
-        // Remove all listeners after first interaction
-        events.forEach(event => {
-          document.removeEventListener(event, handleInteraction);
-        });
-      }
-      
-      // Add listeners for all interaction types
-      events.forEach(event => {
-        document.addEventListener(event, handleInteraction, { once: true });
-      });
-    }
+    // Try to play when page loads
+    document.addEventListener('DOMContentLoaded', tryPlayAudio);
     
-    // Setup everything when page loads
-    document.addEventListener('DOMContentLoaded', () => {
-      tryPlayAudio(); // Try immediate play (works on desktop)
-      setupUserInteractionListeners(); // Setup for mobile/iOS
-      
-      // Show music prompt after 2 seconds if audio hasn't started (likely iOS)
-      setTimeout(() => {
-        if (!audioStarted) {
-          const prompt = document.getElementById('music-prompt');
-          if (prompt) prompt.style.display = 'block';
-        }
-      }, 2000);
-    });
-    
-    // Function to hide music prompt
-    function hideMusicPrompt() {
-      const prompt = document.getElementById('music-prompt');
-      if (prompt) prompt.style.display = 'none';
-    }
-    
-    // Setup everything when page loads
-    document.addEventListener('DOMContentLoaded', () => {
-      tryPlayAudio(); // Try immediate play (works on desktop)
-      setupUserInteractionListeners(); // Setup for mobile/iOS
-      
-      // Show music prompt after 2 seconds if audio hasn't started (likely iOS)
-      setTimeout(() => {
-        if (!audioStarted) {
-          const prompt = document.getElementById('music-prompt');
-          if (prompt) prompt.style.display = 'block';
-        }
-      }, 2000);
-    });
-    
-    // Handle visibility changes (tab switching)
+    // Also try when page becomes visible (if user switches tabs)
     document.addEventListener('visibilitychange', () => {
-      if (!document.hidden && audio && audio.paused && audioStarted) {
+      if (!document.hidden && audio && audio.paused) {
         audio.play().catch(e => console.log('Could not resume audio'));
       }
     });
@@ -313,11 +245,8 @@
     });
   </script>
   
-  <!-- Audio with iOS-friendly attributes -->
-  <audio preload="auto" controls style="display: none;">
+  <audio autoplay loop preload="auto">
     <source src="music/Sade_SO.mp3" type="audio/mpeg">
-    <source src="music/Sade_SO.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
   </audio>
 </body>
 </html>
